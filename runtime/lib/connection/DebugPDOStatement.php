@@ -88,6 +88,9 @@ class DebugPDOStatement extends PDOStatement
     {
         $debug	= $this->pdo->getDebugSnapshot();
         $return	= parent::execute($input_parameters);
+        if ($input_parameters) {
+            $this->boundValues += $input_parameters;
+        }
 
         $sql = $this->getExecutedQueryString();
         $this->pdo->log($sql, null, __METHOD__, $debug);
