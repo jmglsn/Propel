@@ -67,7 +67,7 @@ class DebugPDOStatement extends PDOStatement
     public function getExecutedQueryString(array $values = array())
     {
         $sql = $this->queryString;
-        $boundValues = $this->boundValues + $values;
+        $boundValues = empty($values) ? $this->boundValues : $values;
         $matches = array();
         if (preg_match_all('/(:p[0-9]+\b)/', $sql, $matches)) {
             $size = count($matches[1]);
